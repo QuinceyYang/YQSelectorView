@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D086E60D70D5E70ECE4FBCB /* libPods-YQSelectorView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1BD7DBD72AFA4226F38031 /* libPods-YQSelectorView.a */; };
 		4D2C0FA922AE3D0000D269B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C0FA822AE3D0000D269B9 /* AppDelegate.m */; };
 		4D2C0FAC22AE3D0000D269B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C0FAB22AE3D0000D269B9 /* ViewController.m */; };
 		4D2C0FAF22AE3D0000D269B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C0FAD22AE3D0000D269B9 /* Main.storyboard */; };
 		4D2C0FB122AE3D0500D269B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C0FB022AE3D0500D269B9 /* Assets.xcassets */; };
 		4D2C0FB422AE3D0500D269B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C0FB222AE3D0500D269B9 /* LaunchScreen.storyboard */; };
 		4D2C0FB722AE3D0500D269B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C0FB622AE3D0500D269B9 /* main.m */; };
+		4D2C0FC022AE3EC400D269B9 /* YQSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C0FBF22AE3EC400D269B9 /* YQSelectorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AF41907137035443D687441 /* Pods-YQSelectorView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YQSelectorView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YQSelectorView/Pods-YQSelectorView.debug.xcconfig"; sourceTree = "<group>"; };
 		4D2C0FA422AE3D0000D269B9 /* YQSelectorView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YQSelectorView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2C0FA722AE3D0000D269B9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4D2C0FA822AE3D0000D269B9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +29,10 @@
 		4D2C0FB322AE3D0500D269B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D2C0FB522AE3D0500D269B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D2C0FB622AE3D0500D269B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4D2C0FBE22AE3EC400D269B9 /* YQSelectorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YQSelectorView.h; sourceTree = "<group>"; };
+		4D2C0FBF22AE3EC400D269B9 /* YQSelectorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YQSelectorView.m; sourceTree = "<group>"; };
+		6E1BD7DBD72AFA4226F38031 /* libPods-YQSelectorView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YQSelectorView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DE1F7C17FDC5C1702234CA6 /* Pods-YQSelectorView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YQSelectorView.release.xcconfig"; path = "Pods/Target Support Files/Pods-YQSelectorView/Pods-YQSelectorView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D086E60D70D5E70ECE4FBCB /* libPods-YQSelectorView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +52,8 @@
 			children = (
 				4D2C0FA622AE3D0000D269B9 /* YQSelectorView */,
 				4D2C0FA522AE3D0000D269B9 /* Products */,
+				66D546554863D558C8AE2F46 /* Pods */,
+				C1B78FCD6AD24D211E002CE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +68,7 @@
 		4D2C0FA622AE3D0000D269B9 /* YQSelectorView */ = {
 			isa = PBXGroup;
 			children = (
+				4D2C0FBD22AE3E5100D269B9 /* YQSelectorView */,
 				4D2C0FA722AE3D0000D269B9 /* AppDelegate.h */,
 				4D2C0FA822AE3D0000D269B9 /* AppDelegate.m */,
 				4D2C0FAA22AE3D0000D269B9 /* ViewController.h */,
@@ -71,6 +82,32 @@
 			path = YQSelectorView;
 			sourceTree = "<group>";
 		};
+		4D2C0FBD22AE3E5100D269B9 /* YQSelectorView */ = {
+			isa = PBXGroup;
+			children = (
+				4D2C0FBE22AE3EC400D269B9 /* YQSelectorView.h */,
+				4D2C0FBF22AE3EC400D269B9 /* YQSelectorView.m */,
+			);
+			path = YQSelectorView;
+			sourceTree = "<group>";
+		};
+		66D546554863D558C8AE2F46 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0AF41907137035443D687441 /* Pods-YQSelectorView.debug.xcconfig */,
+				7DE1F7C17FDC5C1702234CA6 /* Pods-YQSelectorView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C1B78FCD6AD24D211E002CE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E1BD7DBD72AFA4226F38031 /* libPods-YQSelectorView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,6 +115,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D2C0FBA22AE3D0500D269B9 /* Build configuration list for PBXNativeTarget "YQSelectorView" */;
 			buildPhases = (
+				898E5B47D1CF12FAA82B7831 /* [CP] Check Pods Manifest.lock */,
 				4D2C0FA022AE3D0000D269B9 /* Sources */,
 				4D2C0FA122AE3D0000D269B9 /* Frameworks */,
 				4D2C0FA222AE3D0000D269B9 /* Resources */,
@@ -136,12 +174,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		898E5B47D1CF12FAA82B7831 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YQSelectorView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D2C0FA022AE3D0000D269B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4D2C0FAC22AE3D0000D269B9 /* ViewController.m in Sources */,
+				4D2C0FC022AE3EC400D269B9 /* YQSelectorView.m in Sources */,
 				4D2C0FB722AE3D0500D269B9 /* main.m in Sources */,
 				4D2C0FA922AE3D0000D269B9 /* AppDelegate.m in Sources */,
 			);
@@ -283,15 +343,13 @@
 		};
 		4D2C0FBB22AE3D0500D269B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AF41907137035443D687441 /* Pods-YQSelectorView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 39NAHTB7XV;
 				INFOPLIST_FILE = YQSelectorView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = QuinceyYang.YQSelectorView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -300,15 +358,13 @@
 		};
 		4D2C0FBC22AE3D0500D269B9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DE1F7C17FDC5C1702234CA6 /* Pods-YQSelectorView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 39NAHTB7XV;
 				INFOPLIST_FILE = YQSelectorView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = QuinceyYang.YQSelectorView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
