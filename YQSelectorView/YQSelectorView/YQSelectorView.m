@@ -7,7 +7,6 @@
 //
 
 #import "YQSelectorView.h"
-#import "YQButton.h"
 
 @implementation YQSelectorView
 
@@ -79,6 +78,7 @@
         iFrame.size.height = CGRectGetMaxY(btnsArr.lastObject.frame)+30;
         view.frame = iFrame;
     }
+    selectorView.itemsArr = btnsArr;
     view.center = CGPointMake(selectorView.frame.size.width/2, selectorView.frame.size.height/2);
 
     return selectorView;
@@ -91,6 +91,18 @@
     // Drawing code
 }
 */
+
+#pragma mark - Public
+- (void)setItemsTitleAlignment:(NSTextAlignment)titleAlignment {
+    if (self.itemsArr==nil || self.itemsArr.count<=0) {
+        return;
+    }
+    for (NSInteger i=0; i<self.itemsArr.count; i++) {
+        self.itemsArr[i].titleLabel.textAlignment = titleAlignment;
+    }
+}
+
+
 
 #pragma mark - Private
 /**

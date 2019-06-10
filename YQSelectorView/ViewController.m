@@ -41,6 +41,7 @@
         YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" itemArray:[NSMutableArray arrayWithArray:typesArr] imageOfSelected:[UIImage imageNamed:@"icon_duigou"] selectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
+        [view setItemsTitleAlignment:NSTextAlignmentLeft];
         [self.view.window addSubview:view];
     };
 
