@@ -12,6 +12,11 @@
 @implementation YQSelectorView
 
 + (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title itemArray:(NSMutableArray *)itemArr selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
+    return [YQSelectorView selectorViewWithFrame:frame title:title itemArray:itemArr imageOfSelected:nil selectIndex:selectIndex completion:completion];
+}
+
+
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title itemArray:(NSMutableArray *)itemArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
@@ -47,7 +52,7 @@
     }
     NSMutableArray <YQButton *> *btnsArr = [NSMutableArray new];
     for (NSInteger i=0; i<itemArr.count; i++) {
-        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, 50+i*44, view.frame.size.width-30, 44) title:itemArr[i]];
+        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, 50+i*44, view.frame.size.width-30, 44) title:itemArr[i] image:imageOfSelected];
         btn.tag = i;
         [view addSubview:btn];
         [btnsArr addObject:btn];
@@ -103,11 +108,18 @@
     return img;
 }
 
-- (YQButton *)createCellWithFrame:(CGRect)frame title:(NSString *)title {
-    UIImage *img = [UIImage imageNamed:@"icon_duigou"];
-    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-img.size.width-10, (frame.size.height-img.size.height)/2, img.size.width, img.size.height) titleFrame:CGRectMake(10, (frame.size.height-20)/2, frame.size.width-10-10-img.size.width-5, 20)];
-    [btn setImage:[YQSelectorView imageWithColor:UIColor.clearColor size:img.size] forState:UIControlStateNormal];
-    [btn setImage:img forState:UIControlStateSelected];
+- (YQButton *)createCellWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image {
+    YQButton *btn;
+    if (image == nil) {
+        image = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
+        btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(10, (frame.size.height-20)/2, frame.size.width-10-10-image.size.width, 20)];
+    }
+    else {
+        btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width-10, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(10, (frame.size.height-20)/2, frame.size.width-10-10-image.size.width-5, 20)];
+    }
+    
+    [btn setImage:[YQSelectorView imageWithColor:UIColor.clearColor size:image.size] forState:UIControlStateNormal];
+    [btn setImage:image forState:UIControlStateSelected];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor colorWithRed:0x66/255.0 green:0x66/255.0 blue:0x66/255.0 alpha:1.0] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor colorWithRed:0xff/255.0 green:0xa7/255.0 blue:0x26/255.0 alpha:1.0] forState:UIControlStateSelected];
