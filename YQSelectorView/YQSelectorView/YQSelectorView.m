@@ -40,10 +40,11 @@
     //
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 18, view.frame.size.width-40, 22)];
     titleLab.text = title;
-    titleLab.textColor = [UIColor colorWithRed:0x33/255.0 green:0x33/255.0 blue:0x33/255.0 alpha:1.0];
+    titleLab.textColor = [UIColor colorWithRed:0x22/255.0 green:0x22/255.0 blue:0x22/255.0 alpha:1.0];
     titleLab.font = [UIFont systemFontOfSize:18];
     titleLab.textAlignment = NSTextAlignmentCenter;
     [view addSubview:titleLab];
+    selectorView.titleLab = titleLab;
     //
     YQButton *closeBtn = [[YQButton alloc] initWithFrame:CGRectMake(view.frame.size.width-40, 0, 40, 40)];
     [closeBtn setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
@@ -184,7 +185,7 @@
     }
     else {
         [btn setTitle:title forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:0x66/255.0 green:0x66/255.0 blue:0x66/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithRed:0x55/255.0 green:0x55/255.0 blue:0x55/255.0 alpha:1.0] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithRed:0xff/255.0 green:0xa7/255.0 blue:0x26/255.0 alpha:1.0] forState:UIControlStateSelected];
         btn.titleLabel.font = [UIFont systemFontOfSize:16];
     }

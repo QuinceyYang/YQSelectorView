@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YQSelectorView : UIView
 
+@property (strong, nonatomic) UILabel *titleLab;
 @property (strong, nonatomic) NSMutableArray <YQButton *> * itemsArr;
 /// 用户选择了某项后，是否自动关闭视图，默认为YES
 @property (assign, nonatomic) BOOL isAutoCloseWhenSelected;
