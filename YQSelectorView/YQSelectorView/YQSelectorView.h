@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YQButton.h"
+#import <YQButton.h>
 
 typedef NS_ENUM(NSUInteger, YQSelectorViewType) {
     YQSelectorViewTypeDefault,

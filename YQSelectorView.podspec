@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YQSelectorView"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "一个简单易用的弹出框选择器."
 
   # This description is used to generate tags and improve search results.
@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = <<-DESC
-                   DESC
+#  s.description  = <<-DESC
+#                   DESC
 
   s.homepage     = "https://github.com/QuinceyYang/YQSelectorView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
