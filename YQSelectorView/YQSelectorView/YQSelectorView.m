@@ -38,7 +38,7 @@
     view.backgroundColor = UIColor.whiteColor;
     [selectorView addSubview:view];
     //
-    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, view.frame.size.width-40, 22)];
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 18, view.frame.size.width-40, 22)];
     titleLab.text = title;
     titleLab.textColor = [UIColor colorWithRed:0x33/255.0 green:0x33/255.0 blue:0x33/255.0 alpha:1.0];
     titleLab.font = [UIFont systemFontOfSize:18];
@@ -54,7 +54,7 @@
         [UIView commitAnimations];
     };
     //
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 48.5, view.frame.size.width, 0.5)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 53.5, view.frame.size.width, 0.5)];
     line.backgroundColor = [UIColor colorWithRed:0xe8/255.0 green:0xe8/255.0 blue:0xe8/255.0 alpha:1.0];
     [view addSubview:line];
     //
@@ -70,6 +70,17 @@
         }
         textArr = tmpArr;
     }
+    CGFloat btnHeight = 44;
+    if (textArr.count <= 3) {
+        btnHeight = 50;
+        titleLab.center = CGPointMake(view.frame.size.width/2, 32);
+        line.frame = CGRectMake(0, 59.5, view.frame.size.width, 0.5);
+    }
+    else if (textArr.count <= 6) {
+        btnHeight = 47;
+        titleLab.center = CGPointMake(view.frame.size.width/2, 31);
+        line.frame = CGRectMake(0, 56.5, view.frame.size.width, 0.5);
+    }
     NSMutableArray <YQButton *> *btnsArr = [NSMutableArray new];
     for (NSInteger i=0; i<textArr.count; i++) {
         UIImage *icon = nil;
@@ -80,7 +91,7 @@
         if (attributedTextArr!=nil && i<attributedTextArr.count) {
             attrStr = attributedTextArr[i];
         }
-        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, 52+i*44, view.frame.size.width-30, 44) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
+        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, CGRectGetMaxY(line.frame)+3+i*btnHeight, view.frame.size.width-30, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
         btn.tag = i;
         [view addSubview:btn];
         [btnsArr addObject:btn];
@@ -159,7 +170,7 @@
     if (image == nil) {
         image = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
     }
-    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(icon.size.width+3, (frame.size.height-22)/2, frame.size.width-(icon.size.width+3)-image.size.width-3, 22)];
+    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(icon.size.width+5, (frame.size.height-22)/2, frame.size.width-(icon.size.width+5)-image.size.width-3, 22)];
     //
     UIImageView *iconIv = [[UIImageView alloc] initWithFrame:CGRectMake(0, (frame.size.height-icon.size.height)/2, icon.size.width, icon.size.height)];
     iconIv.tag = 100;
