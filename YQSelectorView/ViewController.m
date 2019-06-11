@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <YQButton.h>
+#import <YQButton/YQButton.h>
 #import "YQSelectorView.h"
 
 @interface ViewController ()

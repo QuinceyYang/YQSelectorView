@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <YQButton.h>
-
-typedef NS_ENUM(NSUInteger, YQSelectorViewType) {
-    YQSelectorViewTypeDefault,
-    YQSelectorViewTypeTitleAtCenter,
-};
-
+#import <YQButton/YQButton.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

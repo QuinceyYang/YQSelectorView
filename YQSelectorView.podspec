@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YQSelectorView"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "一个简单易用的弹出框选择器."
 
   # This description is used to generate tags and improve search results.
