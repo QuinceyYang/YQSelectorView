@@ -40,11 +40,11 @@
     //btn.center = self.view.center;
     [self.view addSubview:btn2];
     btn2.tapAction = ^(YQButton *sender) {
-        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" textArray:typesArr iconArr:iconArr imageOfSelected:[UIImage imageNamed:@"icon_duigou"] selectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
+        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" iconArr:iconArr textArray:typesArr imageOfSelected:[UIImage imageNamed:@"icon_duigou"] selectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
         view.isAutoCloseWhenSelected = NO;
-        [view setItemsTitleAlignment:NSTextAlignmentLeft];
+        [view setItemsTextAlignment:NSTextAlignmentLeft];
         [self.view.window addSubview:view];
     };
 
