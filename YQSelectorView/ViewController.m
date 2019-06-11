@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    __weak __typeof(self)weakSelf = self;
     NSArray *typesArr = @[@"住宅",@"写字楼",@"公共机构",@"商业",@"商住两用",@"商写两用",@"旅游景点"];
     UIImage *icon = [UIImage imageNamed:@"icon_scorePay"];
     NSArray *iconArr = @[icon,icon,icon,icon,icon,icon];
@@ -31,7 +32,7 @@
         YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" textArray:[NSMutableArray arrayWithArray:typesArr] selectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
-        [self.view.window addSubview:view];
+        [weakSelf.view.window addSubview:view];
     };
     //
     YQButton *btn2 = [[YQButton alloc] initWithFrame:CGRectMake(0, 175, 250, 100)];
@@ -45,7 +46,7 @@
         }];
         view.isAutoCloseWhenSelected = NO;
         [view setItemsTextAlignment:NSTextAlignmentLeft];
-        [self.view.window addSubview:view];
+        [weakSelf.view.window addSubview:view];
     };
     //
     YQButton *btn3 = [[YQButton alloc] initWithFrame:CGRectMake(0, 285, 250, 100)];
@@ -66,7 +67,7 @@
         }];
         view.isAutoCloseWhenSelected = NO;
         [view setItemsTextAlignment:NSTextAlignmentLeft];
-        [self.view.window addSubview:view];
+        [weakSelf.view.window addSubview:view];
     };
 
 }

@@ -105,7 +105,7 @@
             }
             sender.selected = YES;
             if (completion) {
-                completion(sender.tag, [sender titleForState:UIControlStateNormal]);
+                completion(sender.tag, [sender titleForState:UIControlStateNormal] ?: [sender attributedTitleForState:UIControlStateNormal].string);
             }
             if (selectorView.isAutoCloseWhenSelected == YES) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
