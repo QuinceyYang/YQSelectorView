@@ -23,11 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户选择了某项后，是否自动关闭视图，默认为YES
 @property (assign, nonatomic) BOOL isAutoCloseWhenSelected;
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title itemArray:(NSMutableArray *)itemArr selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title textArray:(NSArray *)textArr selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title itemArray:(NSMutableArray *)itemArr imageOfSelected:(UIImage * _Nullable)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title itemArray:(NSMutableArray *)itemArr iconArr:(NSArray <UIImage *> *)iconArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title textArray:(NSArray *)textArr imageOfSelected:(UIImage * _Nullable)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
+
+
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title textArray:(NSArray *)textArr iconArr:(NSArray <UIImage *> * _Nullable)iconArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
+
 
 - (void)setItemsTitleAlignment:(NSTextAlignment)titleAlignment;
 
