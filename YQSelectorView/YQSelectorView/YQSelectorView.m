@@ -10,29 +10,29 @@
 
 @implementation YQSelectorView
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title textArray:(NSArray *)textArr selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title textArray:(NSArray *)textArr defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
-    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:nil textArray:textArr attributedTextArray:nil imageOfSelected:nil selectIndex:selectIndex completion:completion];
+    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:nil textArray:textArr attributedTextArray:nil imageOfSelected:nil defaultSelectIndex:defaultSelectIndex completion:completion];
 }
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
-    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:iconArr textArray:textArr attributedTextArray:nil imageOfSelected:imageOfSelected selectIndex:selectIndex completion:completion];
+    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:iconArr textArray:textArr attributedTextArray:nil imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex completion:completion];
 }
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
-    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:iconArr textArray:nil attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected selectIndex:selectIndex completion:completion];
+    return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:iconArr textArray:nil attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex completion:completion];
 }
 
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected selectIndex:(NSInteger)selectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     selectorView.isAutoCloseWhenSelected = YES;
     //
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, selectorView.frame.size.width-100, selectorView.frame.size.height-160)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, selectorView.frame.size.width>375?selectorView.frame.size.width-100:selectorView.frame.size.width-80, selectorView.frame.size.height-160)];
     view.layer.cornerRadius = 6;
     view.layer.masksToBounds = YES;
     view.backgroundColor = UIColor.whiteColor;
@@ -96,7 +96,7 @@
         btn.tag = i;
         [view addSubview:btn];
         [btnsArr addObject:btn];
-        if (i==selectIndex) {
+        if (i==defaultSelectIndex) {
             btn.selected = YES;
         }
         btn.tapAction = ^(YQButton *sender) {
