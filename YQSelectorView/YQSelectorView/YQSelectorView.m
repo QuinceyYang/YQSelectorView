@@ -31,8 +31,10 @@
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     selectorView.isAutoCloseWhenSelected = YES;
+    selectorView.isMustSelectedOne = YES;
     //
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, selectorView.frame.size.width>375?selectorView.frame.size.width-100:selectorView.frame.size.width-80, selectorView.frame.size.height-160)];
+    CGFloat maxContentHeight = (507.0/667.0)*selectorView.frame.size.height;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (295.0/375.0)*selectorView.frame.size.width, maxContentHeight)];
     view.layer.cornerRadius = 6;
     view.layer.masksToBounds = YES;
     view.backgroundColor = UIColor.whiteColor;
@@ -51,7 +53,7 @@
     [view addSubview:closeBtn];
     closeBtn.tapAction = ^(YQButton *sender) {
         [UIView beginAnimations:nil context:nil];
-        [sender.superview.superview removeFromSuperview];
+        [selectorView removeFromSuperview];
         [UIView commitAnimations];
     };
     //
@@ -82,6 +84,9 @@
         titleLab.center = CGPointMake(view.frame.size.width/2, 31);
         line.frame = CGRectMake(0, 56.5, view.frame.size.width, 0.5);
     }
+    
+    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(line.frame), view.frame.size.width, view.frame.size.height-CGRectGetMaxY(line.frame))];
+    [view addSubview:scrollView];
     NSMutableArray <YQButton *> *btnsArr = [NSMutableArray new];
     for (NSInteger i=0; i<textArr.count; i++) {
         UIImage *icon = nil;
@@ -92,34 +97,59 @@
         if (attributedTextArr!=nil && i<attributedTextArr.count) {
             attrStr = attributedTextArr[i];
         }
-        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, CGRectGetMaxY(line.frame)+3+i*btnHeight, view.frame.size.width-30, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
+        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, 3+i*btnHeight, scrollView.frame.size.width-30, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
         btn.tag = i;
-        [view addSubview:btn];
+        [scrollView addSubview:btn];
         [btnsArr addObject:btn];
         if (i==defaultSelectIndex) {
             btn.selected = YES;
         }
         btn.tapAction = ^(YQButton *sender) {
+            
             for (NSInteger i=0; i<btnsArr.count; i++) {
-                btnsArr[i].selected = NO;
+                if (btnsArr[i] != sender) {
+                    btnsArr[i].selected = NO;
+                }
             }
-            sender.selected = YES;
+            if (selectorView.isMustSelectedOne == YES) {
+                sender.selected = YES;
+            }
+            else {
+                sender.selected = !sender.selected;
+            }
+            
             if (completion) {
-                completion(sender.tag, [sender titleForState:UIControlStateNormal] ?: [sender attributedTitleForState:UIControlStateNormal].string);
+                if (sender.selected == YES) {
+                    completion(sender.tag, [sender titleForState:UIControlStateNormal] ?: [sender attributedTitleForState:UIControlStateNormal].string);
+                }
+                else {
+                    completion(-1, nil);
+                }
             }
-            if (selectorView.isAutoCloseWhenSelected == YES) {
+            
+            if (selectorView.isAutoCloseWhenSelected == YES && sender.selected == YES) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [UIView beginAnimations:nil context:nil];
-                    [sender.superview.superview removeFromSuperview];
+                    [selectorView removeFromSuperview];
                     [UIView commitAnimations];
                 });
             }
         };
     }
     if (btnsArr.lastObject) {
-        CGRect iFrame = view.frame;
-        iFrame.size.height = CGRectGetMaxY(btnsArr.lastObject.frame)+20;
-        view.frame = iFrame;
+        if (scrollView.frame.origin.y+CGRectGetMaxY(btnsArr.lastObject.frame) > maxContentHeight) {
+            scrollView.frame = CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, maxContentHeight-scrollView.frame.origin.y);
+        }
+        else {
+            scrollView.frame = CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, CGRectGetMaxY(btnsArr.lastObject.frame));
+        }
+        if (CGRectGetMaxY(btnsArr.lastObject.frame) > scrollView.frame.size.height) {
+            scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(btnsArr.lastObject.frame)+30);
+        }
+        else {
+            scrollView.contentSize = CGSizeZero;
+        }
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, CGRectGetMaxY(scrollView.frame));
     }
     selectorView.itemsArr = btnsArr;
     view.center = CGPointMake(selectorView.frame.size.width/2, selectorView.frame.size.height/2);

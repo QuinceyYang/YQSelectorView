@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     __weak __typeof(self)weakSelf = self;
-    NSArray *typesArr = @[@"住宅",@"写字楼",@"公共机构",@"商业",@"商住两用",@"商写两用",@"旅游景点"];
+    NSArray *typesArr = @[@"住宅",@"写字楼",@"公共机构",@"商业",@"商住两用",@"商写两用",@"旅游景点",@"AAAAA",@"BBBBB",@"CCCCC",@"DDDDD",@"EEEEE",@"FFFFF"];
     UIImage *icon = [UIImage imageNamed:@"icon_scorePay"];
     NSArray *iconArr = @[icon,icon,icon,icon,icon,icon];
     YQButton *btn = [[YQButton alloc] initWithFrame:CGRectMake(0, 66, 250, 100)];
@@ -32,6 +32,7 @@
         YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" textArray:[NSMutableArray arrayWithArray:typesArr] defaultSelectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
+        view.isMustSelectedOne = NO;
         [weakSelf.view.window addSubview:view];
     };
     //
