@@ -56,14 +56,19 @@
     //btn.center = self.view.center;
     [self.view addSubview:btn3];
     btn3.tapAction = ^(YQButton *sender) {
-        NSString *str = @"商住两用";
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:str];
-        [attr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:[str rangeOfString:str]];
+        NSString *str = @"商住两用 \n2020-07-15";
+        NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        textStyle.lineSpacing = 6;
+
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor blueColor],NSParagraphStyleAttributeName:textStyle}];
         [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:[str rangeOfString:@"两用"]];
-        [attr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:[str rangeOfString:str]];
         [attr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:[str rangeOfString:@"商住"]];
-        NSArray *attrArr = [NSArray arrayWithObjects:attr,attr,attr,nil];
-        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" iconArr:iconArr attributedTextArray:attrArr imageOfSelected:[UIImage imageNamed:@"icon_duigou"] defaultSelectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
+        [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:[str rangeOfString:@"2020-07-15"]];
+        [attr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:[str rangeOfString:@"2020-07-15"]];
+        NSString *str2 = @"不选择任何一项";
+        NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:str2 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor grayColor]}];
+        NSArray *attrArr = [NSArray arrayWithObjects:attr,attr,attr,attr2,nil];
+        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds title:@"选择停车场类型" iconArr:@[icon,icon] attributedTextArray:attrArr imageOfSelected:[UIImage imageNamed:@"icon_duigou"] defaultSelectIndex:1 completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
         view.isAutoCloseWhenSelected = NO;

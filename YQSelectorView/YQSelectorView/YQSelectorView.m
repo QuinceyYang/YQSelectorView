@@ -25,16 +25,22 @@
     return [YQSelectorView selectorViewWithFrame:frame title:title iconArr:iconArr textArray:nil attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex completion:completion];
 }
 
-
 + (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
+    
+    return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex completion:completion];
+}
+
++ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     selectorView.isAutoCloseWhenSelected = YES;
     selectorView.isMustSelectedOne = YES;
     //
-    CGFloat maxContentHeight = (507.0/667.0)*selectorView.frame.size.height;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (295.0/375.0)*selectorView.frame.size.width, maxContentHeight)];
+    CGFloat maxContentWidth = contentWidthRatio>0 ? contentWidthRatio*selectorView.frame.size.width : (295.0/375.0)*selectorView.frame.size.width;
+    CGFloat maxContentHeight = contentHeightRatio>0 ? contentHeightRatio*selectorView.frame.size.height : (507.0/667.0)*selectorView.frame.size.height;
+
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, maxContentWidth, maxContentHeight)];
     view.layer.cornerRadius = 6;
     view.layer.masksToBounds = YES;
     view.backgroundColor = UIColor.whiteColor;
@@ -201,7 +207,7 @@
     if (image == nil) {
         image = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
     }
-    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(icon.size.width+5, (frame.size.height-22)/2, frame.size.width-(icon.size.width+5)-image.size.width-3, 22)];
+    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(icon.size.width+5, 0, frame.size.width-(icon.size.width+5)-image.size.width-3, frame.size.height)];
     //
     UIImageView *iconIv = [[UIImageView alloc] initWithFrame:CGRectMake(0, (frame.size.height-icon.size.height)/2, icon.size.width, icon.size.height)];
     iconIv.tag = 100;
@@ -211,6 +217,8 @@
     [btn setImage:[YQSelectorView imageWithColor:UIColor.clearColor size:image.size] forState:UIControlStateNormal];
     [btn setImage:image forState:UIControlStateSelected];
     if (attributedTitle) {
+        btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;//换行模式自动换行
+        btn.titleLabel.numberOfLines = 0;
         [btn setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
     else {
