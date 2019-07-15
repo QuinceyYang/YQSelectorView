@@ -30,7 +30,7 @@
     return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex isConfirmButton:NO completion:completion];
 }
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray * _Nullable)textArr attributedTextArray:(NSArray <NSAttributedString *> * _Nullable)attributedTextArr imageOfSelected:(UIImage * _Nullable)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
