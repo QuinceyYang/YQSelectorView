@@ -27,10 +27,10 @@
 
 + (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
-    return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 cellHeight:50 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex isConfirmButton:NO completion:completion];
+    return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 cellHeight:50 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfNormal:nil imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex isConfirmButton:NO completion:completion];
 }
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio cellHeight:(CGFloat)cellHeight title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray * _Nullable)textArr attributedTextArray:(NSArray <NSAttributedString *> * _Nullable)attributedTextArr imageOfSelected:(UIImage * _Nullable)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio cellHeight:(CGFloat)cellHeight title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray * _Nullable)textArr attributedTextArray:(NSArray <NSAttributedString *> * _Nullable)attributedTextArr imageOfNormal:(UIImage * _Nullable)imageOfNormal imageOfSelected:(UIImage * _Nullable)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
@@ -105,7 +105,7 @@
         if (attributedTextArr!=nil && i<attributedTextArr.count) {
             attrStr = attributedTextArr[i];
         }
-        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(0, 3+i*btnHeight, scrollView.frame.size.width, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
+        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(0, 3+i*btnHeight, scrollView.frame.size.width, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr imageOfNormal:imageOfNormal imageOfSelected:imageOfSelected];
         btn.tag = i;
         [scrollView addSubview:btn];
         [btnsArr addObject:btn];
@@ -248,17 +248,20 @@
     return img;
 }
 
-- (YQButton *)createCellWithFrame:(CGRect)frame icon:(UIImage *)icon title:(NSString *)title attributedTitle:(NSAttributedString *)attributedTitle image:(UIImage *)image {
+- (YQButton *)createCellWithFrame:(CGRect)frame icon:(UIImage *)icon title:(NSString *)title attributedTitle:(NSAttributedString *)attributedTitle imageOfNormal:(UIImage *)imageOfNormal imageOfSelected:(UIImage *)imageOfSelected {
     if (icon == nil) {
         icon = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
     }
-    if (image == nil) {
-        image = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
+    if (imageOfNormal == nil) {
+        imageOfNormal = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
     }
-    
+    if (imageOfSelected == nil) {
+        imageOfSelected = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
+    }
+
     CGRect iconFrame = CGRectMake(15, (frame.size.height-icon.size.height)/2, icon.size.width, icon.size.height);
-    CGRect titleFrame = CGRectMake(CGRectGetMaxX(iconFrame)+5, 1, frame.size.width-(CGRectGetMaxX(iconFrame)+5)-(image.size.width+15)-3, frame.size.height-2);
-    CGRect imageFrame = CGRectMake(frame.size.width-image.size.width-15, (frame.size.height-image.size.height)/2, image.size.width, image.size.height);
+    CGRect titleFrame = CGRectMake(CGRectGetMaxX(iconFrame)+5, 1, frame.size.width-(CGRectGetMaxX(iconFrame)+5)-(imageOfSelected.size.width+15)-3, frame.size.height-2);
+    CGRect imageFrame = CGRectMake(frame.size.width-imageOfSelected.size.width-15, (frame.size.height-imageOfSelected.size.height)/2, imageOfSelected.size.width, imageOfSelected.size.height);
     
     YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:imageFrame titleFrame:titleFrame];
     //
@@ -267,8 +270,8 @@
     iconIv.image = icon;
     [btn addSubview:iconIv];
     //
-    [btn setImage:[YQSelectorView imageWithColor:UIColor.clearColor size:image.size] forState:UIControlStateNormal];
-    [btn setImage:image forState:UIControlStateSelected];
+    [btn setImage:imageOfNormal forState:UIControlStateNormal];
+    [btn setImage:imageOfSelected forState:UIControlStateSelected];
     if (attributedTitle) {
         btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;//换行模式自动换行
         btn.titleLabel.numberOfLines = 0;
@@ -280,7 +283,7 @@
         [btn setTitleColor:[UIColor colorWithRed:0xff/255.0 green:0xa7/255.0 blue:0x26/255.0 alpha:1.0] forState:UIControlStateSelected];
         btn.titleLabel.font = [UIFont systemFontOfSize:16];
     }
-    if (icon.size.width==1 && image.size.width==1) {
+    if (icon.size.width==1 && imageOfSelected.size.width==1) {
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     //

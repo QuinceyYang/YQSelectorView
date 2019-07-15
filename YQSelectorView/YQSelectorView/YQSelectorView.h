@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 创建全功能弹框选择器，不支持的参数可传空
  */
-+ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio cellHeight:(CGFloat)cellHeight title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray * _Nullable)textArr attributedTextArray:(NSArray <NSAttributedString *> * _Nullable)attributedTextArr imageOfSelected:(UIImage * _Nullable)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
++ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio cellHeight:(CGFloat)cellHeight title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray * _Nullable)textArr attributedTextArray:(NSArray <NSAttributedString *> * _Nullable)attributedTextArr imageOfNormal:(UIImage * _Nullable)imageOfNormal imageOfSelected:(UIImage * _Nullable)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion;
 
 
 - (void)setItemsTextAlignment:(NSTextAlignment)textAlignment;

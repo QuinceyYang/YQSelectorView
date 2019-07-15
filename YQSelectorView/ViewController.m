@@ -94,7 +94,7 @@
         NSMutableAttributedString *attr2 = [[NSMutableAttributedString alloc] initWithString:str2 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor grayColor]}];
         NSArray *attrArr = [NSArray arrayWithObjects:attr,attr,attr,attr2,nil];
         
-        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds contentWidthRatio:1.0 contentHeightRatio:0.5 cellHeight:60 title:@"选择优惠券" iconArr:@[icon,icon] textArray:nil attributedTextArray:attrArr imageOfSelected:[UIImage imageNamed:@"icon_duigou"] defaultSelectIndex:1 isConfirmButton:YES completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
+        YQSelectorView *view = [YQSelectorView selectorViewWithFrame:UIScreen.mainScreen.bounds contentWidthRatio:1.0 contentHeightRatio:0.5 cellHeight:60 title:@"选择优惠券" iconArr:@[icon,icon] textArray:nil attributedTextArray:attrArr imageOfNormal:nil imageOfSelected:[UIImage imageNamed:@"icon_duigou"] defaultSelectIndex:1 isConfirmButton:YES completion:^(NSInteger selectedIndex, NSString * _Nonnull selectedString) {
             //
         }];
         view.isAutoCloseWhenSelected = NO;
