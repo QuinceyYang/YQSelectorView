@@ -105,7 +105,7 @@
         if (attributedTextArr!=nil && i<attributedTextArr.count) {
             attrStr = attributedTextArr[i];
         }
-        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(15, 3+i*btnHeight, scrollView.frame.size.width-30, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
+        YQButton *btn = [selectorView createCellWithFrame:CGRectMake(0, 3+i*btnHeight, scrollView.frame.size.width, btnHeight) icon:icon title:textArr[i] attributedTitle:attrStr image:imageOfSelected];
         btn.tag = i;
         [scrollView addSubview:btn];
         [btnsArr addObject:btn];
@@ -255,10 +255,15 @@
     if (image == nil) {
         image = [YQSelectorView imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
     }
-    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:CGRectMake(frame.size.width-image.size.width, (frame.size.height-image.size.height)/2, image.size.width, image.size.height) titleFrame:CGRectMake(icon.size.width+5, 1, frame.size.width-(icon.size.width+5)-image.size.width-3, frame.size.height-2)];
+    
+    CGRect iconFrame = CGRectMake(15, (frame.size.height-icon.size.height)/2, icon.size.width, icon.size.height);
+    CGRect titleFrame = CGRectMake(CGRectGetMaxX(iconFrame)+5, 1, frame.size.width-(CGRectGetMaxX(iconFrame)+5)-(image.size.width+15)-3, frame.size.height-2);
+    CGRect imageFrame = CGRectMake(frame.size.width-image.size.width-15, (frame.size.height-image.size.height)/2, image.size.width, image.size.height);
+    
+    YQButton *btn = [[YQButton alloc] initWithFrame:frame imageFrame:imageFrame titleFrame:titleFrame];
     //
-    UIImageView *iconIv = [[UIImageView alloc] initWithFrame:CGRectMake(0, (frame.size.height-icon.size.height)/2, icon.size.width, icon.size.height)];
-    iconIv.tag = 100;
+    UIImageView *iconIv = [[UIImageView alloc] initWithFrame:iconFrame];
+    iconIv.tag = 100001;
     iconIv.image = icon;
     [btn addSubview:iconIv];
     //
@@ -279,7 +284,8 @@
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     //
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-0.5, frame.size.width, 0.5)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, frame.size.height-0.5, frame.size.width-30, 0.5)];
+    line.tag = 100004;
     line.backgroundColor = [UIColor colorWithRed:0xe8/255.0 green:0xe8/255.0 blue:0xe8/255.0 alpha:1.0];
     [btn addSubview:line];
     return btn;

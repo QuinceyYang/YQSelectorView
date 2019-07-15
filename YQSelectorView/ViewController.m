@@ -103,6 +103,10 @@
         view.contentView.layer.cornerRadius = 10;
         view.confirmBtn.layer.cornerRadius = 5;
         view.confirmBtn.layer.masksToBounds = YES;
+        for (NSInteger i=0; i<view.itemsArr.count; i++) {
+            UIView * line = [view.itemsArr[i] viewWithTag:100004];
+            line.frame = CGRectMake(15, line.frame.origin.y, view.itemsArr[i].frame.size.width-15, line.frame.size.height);
+        }
         [weakSelf.view.window addSubview:view];
     };
 
