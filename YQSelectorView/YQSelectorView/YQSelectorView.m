@@ -27,10 +27,10 @@
 
 + (instancetype)selectorViewWithFrame:(CGRect)frame title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
-    return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex completion:completion];
+    return [YQSelectorView selectorViewWithFrame:frame contentWidthRatio:0 contentHeightRatio:0 title:title iconArr:iconArr textArray:textArr attributedTextArray:attributedTextArr imageOfSelected:imageOfSelected defaultSelectIndex:defaultSelectIndex isConfirmButton:NO completion:completion];
 }
 
-+ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
++ (instancetype)selectorViewWithFrame:(CGRect)frame contentWidthRatio:(CGFloat)contentWidthRatio contentHeightRatio:(CGFloat)contentHeightRatio title:(NSString *)title iconArr:(NSArray <UIImage *> * _Nullable)iconArr textArray:(NSArray *)textArr attributedTextArray:(NSArray <NSAttributedString *> *)attributedTextArr imageOfSelected:(UIImage *)imageOfSelected defaultSelectIndex:(NSInteger)defaultSelectIndex isConfirmButton:(BOOL)isConfirmButton completion:(void (^)(NSInteger selectedIndex, NSString *selectedString))completion {
     
     YQSelectorView *selectorView = [[YQSelectorView alloc] initWithFrame:frame];
     selectorView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
@@ -45,6 +45,7 @@
     view.layer.masksToBounds = YES;
     view.backgroundColor = UIColor.whiteColor;
     [selectorView addSubview:view];
+    selectorView.contentView = view;
     //
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 18, view.frame.size.width-40, 22)];
     titleLab.text = title;
@@ -62,6 +63,9 @@
         [selectorView removeFromSuperview];
         [UIView commitAnimations];
     };
+    if (isConfirmButton == YES) {
+        closeBtn.hidden = YES;
+    }
     //
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 53.5, view.frame.size.width, 0.5)];
     line.backgroundColor = [UIColor colorWithRed:0xe8/255.0 green:0xe8/255.0 blue:0xe8/255.0 alpha:1.0];
@@ -124,7 +128,7 @@
                 sender.selected = !sender.selected;
             }
             
-            if (completion) {
+            if (completion && isConfirmButton==NO) {
                 if (sender.selected == YES) {
                     completion(sender.tag, [sender titleForState:UIControlStateNormal] ?: [sender attributedTitleForState:UIControlStateNormal].string);
                 }
@@ -133,7 +137,7 @@
                 }
             }
             
-            if (selectorView.isAutoCloseWhenSelected == YES && sender.selected == YES) {
+            if (selectorView.isAutoCloseWhenSelected == YES && sender.selected == YES && isConfirmButton==NO) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [UIView beginAnimations:nil context:nil];
                     [selectorView removeFromSuperview];
@@ -160,6 +164,52 @@
     selectorView.itemsArr = btnsArr;
     view.center = CGPointMake(selectorView.frame.size.width/2, selectorView.frame.size.height/2);
     
+    if (isConfirmButton == YES) {
+        CGFloat scrollViewHeight = maxContentHeight-scrollView.frame.origin.y-110 > 0 ?  maxContentHeight-scrollView.frame.origin.y-110 : 50;
+        scrollView.frame = CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollViewHeight);
+        if (CGRectGetMaxY(btnsArr.lastObject.frame) > scrollView.frame.size.height) {
+            scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(btnsArr.lastObject.frame)+30);
+        }
+        else {
+            scrollView.contentSize = CGSizeZero;
+        }
+        //
+        YQButton * confirmBtn = [[YQButton alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(scrollView.frame)+40, view.frame.size.width-30, 46)];
+        [confirmBtn setBackgroundImage:[YQSelectorView imageWithColor:[UIColor colorWithRed:0xff/255.0 green:0xa7/255.0 blue:0x26/255.0 alpha:1.0] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+        [confirmBtn setTitle:@"确 定" forState:UIControlStateNormal];
+        [confirmBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        confirmBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+        [view addSubview:confirmBtn];
+        selectorView.confirmBtn = confirmBtn;
+        //
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, maxContentHeight);
+        view.center = CGPointMake(selectorView.frame.size.width/2, selectorView.frame.size.height/2);
+        //
+        confirmBtn.tapAction = ^(YQButton *sender) {
+            
+            NSInteger flg = -1;
+            for (NSInteger i=0; i<btnsArr.count; i++) {
+                if (btnsArr[i].selected == YES) {
+                    flg = i;
+                    break;
+                }
+            }
+            
+            if (completion) {
+                if (0<=flg && flg<btnsArr.count) {
+                    completion(flg, [btnsArr[flg] titleForState:UIControlStateNormal] ?: [btnsArr[flg] attributedTitleForState:UIControlStateNormal].string);
+                }
+                else {
+                    completion(-1, nil);
+                }
+            }
+
+            [UIView beginAnimations:nil context:nil];
+            [selectorView removeFromSuperview];
+            [UIView commitAnimations];
+
+        };
+    }
     return selectorView;
 }
 

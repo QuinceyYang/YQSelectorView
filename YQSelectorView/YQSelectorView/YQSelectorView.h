@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YQSelectorView : UIView
 
+@property (strong, nonatomic) UIView * contentView;
+@property (strong, nonatomic) YQButton * confirmBtn; ///< 确定按钮，默认为nil
 @property (strong, nonatomic) UILabel *titleLab;
 @property (strong, nonatomic) NSMutableArray <YQButton *> * itemsArr;
 /// 用户必须选中一项，默认为YES
